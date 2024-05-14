@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "*": ["node_modules/*"],
+        "@config/*": ["./src/config/*"],
+        "@controllers/*": ["./src/controllers/*"],
+        "@entities/*": ["./src/database/entities/*"],
+        "@utils/*": ["./src/utils/*"],
+        "@schemas/*": ["./src/schemas/*"],
+        "@middleware/*": ["./src/middleware/*"]
+      }
+    }
+}  
