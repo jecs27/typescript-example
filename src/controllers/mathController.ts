@@ -21,3 +21,17 @@ export const multiplicationTableWithLimit = (req: Request, res: Response) => {
     return res.status(500).send({ status: 500, message: 'Internal Server Error' });
   }
 };
+
+export const multiplicationWithoutMultiplicationOperator = (req: Request, res: Response) => {
+  try {
+    const { multiplicand, multiplier } = req.body;
+    let result = 0;
+    for (let i = 0; i < multiplier; i++) {
+      result += multiplicand;
+    }
+    return res.status(200).send({ status: 200, message: '', data: { result } });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({ status: 500, message: 'Internal Server Error' });
+  }
+};
