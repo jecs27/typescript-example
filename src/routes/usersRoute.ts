@@ -13,8 +13,8 @@ import {
 export const UsersRoute = (route: express.Application) => {
   route.post('/user', createUser);
   route.put('/user/:id/reset', validateToken, resetPasswordUser);
-  route.patch('/user/:id', updateUser);
-  route.delete('/user/:id', deleteUser);
+  route.patch('/user/:id', validateToken, updateUser);
+  route.delete('/user/:id', validateToken, deleteUser);
   route.get('/user/:id', validateToken, getUserData);
   route.get('/user', validateToken, getUserData);
   route.post('/login', login);
