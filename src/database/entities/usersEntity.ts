@@ -1,6 +1,7 @@
-import { Entity, Column, Index } from 'typeorm';
+import { Entity, Column, Index, OneToMany } from 'typeorm';
 
 import BaseEntity from './baseEntity';
+import Tasks from './tasksEntity';
 
 @Entity('users')
 export default class User extends BaseEntity {
@@ -17,4 +18,7 @@ export default class User extends BaseEntity {
   @Index()
   @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
     email: string;
+
+  @OneToMany(() => Tasks, (tasks) => tasks.userUuid)
+    tasks: Tasks[];
 }
