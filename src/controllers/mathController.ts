@@ -10,3 +10,28 @@ export const multiplicationTable = (req: Request, res: Response) => {
     return res.status(500).send({ status: 500, message: 'Internal Server Error' });
   }
 };
+
+export const multiplicationTableWithLimit = (req: Request, res: Response) => {
+  try {
+    const { number, limit } = req.body;
+    const table = Array.from({ length: limit }, (_v, i) => i + 1).map((i) => i * number);
+    return res.status(200).send({ status: 200, message: '', data: { table } });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({ status: 500, message: 'Internal Server Error' });
+  }
+};
+
+export const multiplicationWithoutMultiplicationOperator = (req: Request, res: Response) => {
+  try {
+    const { multiplicand, multiplier } = req.body;
+    let result = 0;
+    for (let i = 0; i < multiplier; i++) {
+      result += multiplicand;
+    }
+    return res.status(200).send({ status: 200, message: '', data: { result } });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({ status: 500, message: 'Internal Server Error' });
+  }
+};
