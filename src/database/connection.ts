@@ -9,8 +9,13 @@ const {
   DATABASE_PORT,
   DATABASE_USERNAME,
   DATABASE_PASSWORD,
-  DATABASE_NAME
+  DATABASE_NAME,
+  SSL_ENABLED,
+  SSL_REJECT_UNAUTHORIZED
 } = process.env;
+
+const sslEnabled = (SSL_ENABLED === 'true');
+const sslRejectUnauthorized = (SSL_REJECT_UNAUTHORIZED !== 'true');
 
 export const dataSource = new DataSource({
   type: 'postgres',
@@ -26,12 +31,11 @@ export const dataSource = new DataSource({
     Tasks
   ],
   migrations: ['src/database/migrations/*.ts'],
-  ssl: true,
-  extra: {
+  ...(sslEnabled && {
     ssl: {
-      rejectUnauthorized: false
+      rejectUnauthorized: sslRejectUnauthorized
     }
-  }
+  })
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
